@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Sports Management System</title>
+    <!-- Tailwind CSS (for speedy, mobile-friendly utility rendering) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configure Tailwind custom color values to coordinate with our style.css theme
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              varsityNavy: '#0f172a',
+              varsityGold: '#d97706',
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Custom styling stylesheet for print configurations and premium layout enhancements -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-emerald-50/50 text-slate-800 font-sans min-h-screen pb-12">
+
+    <!-- --- BACKGROUND ORNAMENTAL GRAPHICS --- -->
+    <div class="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-950 -z-10 no-print"></div>
+
+    <!-- --- APP HEADER SECTION --- -->
+    <header class="max-w-7xl mx-auto px-4 pt-8 pb-4 text-white no-print">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-emerald-950/45 backdrop-blur-md p-6 rounded-2xl border border-emerald-500/20">
+            <!-- Athletic logo and title badge -->
+            <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-lg border-2 border-white/25 bg-slate-100 flex items-center justify-center">
+                    <img src="image/school.jpg" alt="School Mascot" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=200'">
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-sky-400">STUDENT SPORTS</h1>
+                    <p class="text-xs text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20 inline-block mt-1">
+                        Management Registry Portal
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Quick Date/System Metadata badge -->
+            <div class="text-center md:text-right">
+                <p class="text-sm font-semibold opacity-75">Varsity Season 2026</p>
+                <p class="text-xs text-amber-300 font-medium mt-1 font-mono-val bg-white/10 px-3 py-1.5 rounded-lg border border-white/10">Active System Monitor</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- --- CORE DISPLAY AREA GRID --- -->
+    <main class="max-w-7xl mx-auto px-4 mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+        
+        <!-- ==============================================
+             LEFT ASIDE RAIL: OVERALL ANALYTICAL STATS 
+             ============================================== -->
+        <section class="lg:col-span-12 space-y-8 no-print">
+            <!-- Metrics cards grid representing live counters -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Count Item 1: Total Sporters -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-5 hover-card-trigger">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl font-bold">
+                        👥
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Total Registrants</p>
+                        <h3 class="text-2xl font-extrabold text-slate-900 mt-1" id="statTotalStudents">0</h3>
+                        <p class="text-xs text-indigo-500 font-medium mt-0.5">Active players enrolled</p>
+                    </div>
+                </div>
+
+                <!-- Count Item 2: Average Score -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-5 hover-card-trigger">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold">
+                        📈
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Average Score</p>
+                        <h3 class="text-2xl font-extrabold text-emerald-800 mt-1" id="statAverageScore">0%</h3>
+                        <p class="text-xs text-emerald-500 font-medium mt-0.5">Physical test metrics</p>
+                    </div>
+                </div>
+
+                <!-- Count Item 3: Top Performer citation -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-5 hover-card-trigger">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold">
+                        👑
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Top Achieving Player</p>
+                        <h3 class="text-base font-extrabold text-slate-800 truncate mt-1" id="statTopScorer">N/A</h3>
+                        <span class="inline-block px-2 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-800 rounded mt-1 font-mono-val" id="statTopScoreBadge">0 pts</span>
+                    </div>
+                </div>
+
+                <!-- Count Item 4: Success Ratio scale -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-5 hover-card-trigger">
+                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-50 flex items-center justify-center text-2xl font-bold">
+                        🏆
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Pass Ratio</p>
+                        <h3 class="text-2xl font-extrabold text-rose-950 mt-1 float-right" id="statPassRate">0%</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-0.5">Score index >= 50%</p>
+                        
+                        <!-- Visual linear indicator progress bar -->
+                        <div class="w-full h-1.5 bg-slate-100 rounded-full mt-2 overflow-hidden">
+                            <div class="bg-indigo-600 h-full transition-all duration-500" id="statPassProgressWidth" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative gallery cards representing various active sports options -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-slate-900 md:text-white flex items-center gap-2">
+                        ⭐ Interactive Sports Showcase
+                    </h3>
+                    <p class="text-xs font-semibold text-slate-400 md:text-indigo-200">
+                        💡 Click a card to filter registry list details
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    
+                    <!-- Sport Card 1: Football -->
+                    <div onclick="document.querySelector('[data-sport=\'Football\']').click()" class="relative h-28 rounded-2xl overflow-hidden cursor-pointer hover:shadow-md transition-all group border border-transparent hover:border-indigo-400">
+                        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=400" alt="Football image" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-slate-950/20"></div>
+                        <div class="absolute bottom-3 left-3 text-white">
+                            <h4 class="text-sm font-bold">⚽ Football</h4>
+                            <p class="text-[10px] text-indigo-300 mt-0.5" id="footballCount">0 Registered</p>
+                        </div>
+                    </div>
+
+                    <!-- Sport Card 2: Cricket -->
+                    <div onclick="document.querySelector('[data-sport=\'Cricket\']').click()" class="relative h-28 rounded-2xl overflow-hidden cursor-pointer hover:shadow-md transition-all group border border-transparent hover:border-amber-400">
+                        <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=400" alt="Cricket image" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-slate-950/20"></div>
+                        <div class="absolute bottom-3 left-3 text-white">
+                            <h4 class="text-sm font-bold">🏏 Cricket</h4>
+                            <p class="text-[10px] text-amber-300 mt-0.5" id="cricketCount">0 Registered</p>
+                        </div>
+                    </div>
+
+                    <!-- Sport Card 3: Basketball -->
+                    <div onclick="document.querySelector('[data-sport=\'Basketball\']').click()" class="relative h-28 rounded-2xl overflow-hidden cursor-pointer hover:shadow-md transition-all group border border-transparent hover:border-orange-400">
+                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=400" alt="Basketball image" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-slate-950/20"></div>
+                        <div class="absolute bottom-3 left-3 text-white">
+                            <h4 class="text-sm font-bold">🏀 Basketball</h4>
+                            <p class="text-[10px] text-orange-300 mt-0.5" id="basketballCount">0 Registered</p>
+                        </div>
+                    </div>
+
+                    <!-- Sport Card 4: Volleyball -->
+                    <div onclick="document.querySelector('[data-sport=\'Volleyball\']').click()" class="relative h-28 rounded-2xl overflow-hidden cursor-pointer hover:shadow-md transition-all group border border-transparent hover:border-cyan-400">
+                        <img src="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&q=80&w=400" alt="Volleyball image" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-slate-950/20"></div>
+                        <div class="absolute bottom-3 left-3 text-white">
+                            <h4 class="text-sm font-bold">🏐 Volleyball</h4>
+                            <p class="text-[10px] text-cyan-300 mt-0.5" id="volleyballCount">0 Registered</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             LEFT FORM WINDOW (5 Cols layout)
+             ============================================== -->
+        <section class="lg:col-span-4 no-print">
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all" id="studentFormWrapper">
+                <!-- Glowing indicator active only of editing -->
+                <div class="h-1.5 bg-indigo-600 w-full transition-all" id="formIndicatorBar"></div>
+                
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2" id="formTitleText">
+                        ➕ Add New Student Record
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">
+                        Register or edit student athletic details. Changes are persisted locally.
+                    </p>
+
+                    <!-- Student Registration Submission form -->
+                    <form id="studentForm" class="mt-6 space-y-4">
+                        
+                        <!-- Input 1: Student Unique ID -->
+                        <div>
+                            <label for="studentId" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Student ID <span class="text-rose-500">*</span></label>
+                            <input type="text" id="studentId" placeholder="e.g. STU-1005" required
+                                   class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all font-mono-val bg-slate-50 focus:bg-white">
+                            <span class="text-[10px] text-slate-400 block mt-1 leading-normal">Assign a unique code format ID to track sporter records. In editing mode, this updates safely.</span>
+                        </div>
+
+                        <!-- Input 2: Full Name -->
+                        <div>
+                            <label for="studentName" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Student Full Name <span class="text-rose-500">*</span></label>
+                            <input type="text" id="studentName" placeholder="e.g. Michael Smith" required
+                                   class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all bg-slate-50 focus:bg-white">
+                        </div>
+
+                        <!-- Input 3: Class/Grade -->
+                        <div>
+                            <label for="studentClass" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Class / Grade <span class="text-rose-500">*</span></label>
+                            <input type="text" id="studentClass" placeholder="e.g. Class 11-A" required
+                                   class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all bg-slate-50 focus:bg-white">
+                        </div>
+
+                        <!-- Input 4: Sports Type dropdown -->
+                        <div>
+                            <label for="studentSport" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Sport Name <span class="text-rose-500">*</span></label>
+                            <select id="studentSport" required
+                                    class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all focus:bg-white">
+                                <option value="" disabled selected>Select sport category...</option>
+                                <option value="Football">⚽ Football</option>
+                                <option value="Cricket">🏏 Cricket</option>
+                                <option value="Basketball">🏀 Basketball</option>
+                                <option value="Volleyball">🏐 Volleyball</option>
+                                <option value="Badminton">🏸 Badminton</option>
+                                <option value="Tennis">🎾 Tennis</option>
+                            </select>
+                        </div>
+
+                        <!-- Input 5: Score Index / Marks -->
+                        <div>
+                            <label for="studentScore" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Sports Test Marks (0-100) <span class="text-rose-500">*</span></label>
+                            <div class="relative">
+                                <input type="number" id="studentScore" placeholder="e.g. 85" min="0" max="100" required
+                                       class="w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all font-mono-val bg-slate-50 focus:bg-white pr-10">
+                                <div class="absolute inset-y-0 right-3 flex items-center justify-center text-xs font-bold text-slate-400 font-mono-val">%</div>
+                            </div>
+                            <span class="text-[10px] text-slate-400 block mt-1 leading-normal">Score counts toward final dynamic grading assessment metrics.</span>
+                        </div>
+
+                        <!-- Action Submit trigger buttons -->
+                        <div class="pt-2 flex flex-col gap-2">
+                            <button type="submit" id="formSubmitBtn"
+                                    class="w-full py-2.5 px-4 rounded-xl text-sm font-bold bg-slate-900 text-white hover:bg-indigo-950 hover:shadow-md active:scale-95 transition-all text-center cursor-pointer">
+                                Save Sporter Record ✨
+                            </button>
+                            <!-- Hidden by default, triggers cancellation of editing -->
+                            <button type="button" id="formCancelBtn"
+                                    class="w-full py-2 px-4 rounded-xl text-sm font-semibold text-slate-500 hover:text-slate-800 border border-slate-200 hover:border-slate-300 transition-all hidden cursor-pointer">
+                                Cancel Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             RIGHT REGISTRY DIRECTORY AND FILTER PANEL (8 Cols)
+             ============================================== -->
+        <section class="lg:col-span-8 space-y-6 no-print">
+            
+            <!-- Quick Filter and Search controls bar -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+                    <!-- Text Search bar field input -->
+                    <div class="relative flex-1">
+                        <input type="text" id="searchBar" placeholder="Search by Student ID, Name..."
+                               class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all bg-slate-50/50">
+                        <span class="absolute left-3.5 top-2.5 text-slate-400 text-sm">🔍</span>
+                    </div>
+
+                    <!-- Clean Quick Print or Resource Tips button helper -->
+                    <div class="flex items-center gap-2">
+                        <button onclick="window.print()" class="px-4 py-2 rounded-xl border border-slate-200 hover:border-slate-300 text-sm font-semibold text-slate-600 hover:text-slate-800 transition-all flex items-center gap-2" title="Print Entire Directory Page list">
+                            🖨️ Print Directory
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Horizontal dynamic sport-filtering navigation row -->
+                <div class="border-t border-slate-100 pt-3">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Filter List By Category:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button data-sport="All" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-900 text-white shadow-sm cursor-pointer">All Registry</button>
+                        <button data-sport="Football" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-50 transition-all cursor-pointer">⚽ Football</button>
+                        <button data-sport="Cricket" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-50 transition-all cursor-pointer">🏏 Cricket</button>
+                        <button data-sport="Basketball" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-50 transition-all cursor-pointer">🏀 Basketball</button>
+                        <button data-sport="Volleyball" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-50 transition-all cursor-pointer">🏐 Volleyball</button>
+                        <button data-sport="Badminton" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-50 transition-all cursor-pointer">🏸 Badminton</button>
+                        <button data-sport="Tennis" class="sport-filter px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-50 transition-all cursor-pointer">🎾 Tennis</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main responsive list display container card -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-slate-50 flex items-center justify-between">
+                    <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                        📋 Enrolled Sports Roster
+                    </h3>
+                    <span class="px-2.5 py-0.5 text-xs font-bold bg-indigo-50 text-indigo-700 rounded-lg border border-indigo-100">Active Listing</span>
+                </div>
+
+                <!-- DESKTOP MODE: FULL ROBUST DETAILED ATTR TABLE -->
+                <div class="hidden md:block overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/70 border-b border-slate-100">
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Student ID</th>
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Student Name</th>
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Class/Grading</th>
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Selected Sport</th>
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Marks</th>
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Grading Result</th>
+                                <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody" class="divide-y divide-slate-100">
+                            <!-- Injected dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- MOBILE MODE: CARD BLOCK FLOW DISPLAY (renders nicely on cellular dimensions) -->
+                <div id="mobileStudentList" class="block md:hidden p-4 space-y-4">
+                    <!-- Injected dynamically via script.js -->
+                </div>
+            </div>
+            
+            <!-- Beginner developer informational card info footer links -->
+            <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100/60 no-print">
+                <h4 class="text-sm font-bold text-indigo-900 flex items-center gap-2">
+                    🎓 Code Study Notes for Students & Beginners 
+                </h4>
+                <p class="text-xs text-indigo-800 mt-2 leading-relaxed">
+                    This Student Sports Management application persists your records within your own web browser's <strong>localStorage</strong> engine. You do not need backends like PHP, Python or SQL database servers to double-click and play with this portal!
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 text-[11px] text-indigo-700 font-semibold">
+                    <div class="flex items-start gap-1">
+                        <span>📄</span>
+                        <span><strong>index.html</strong> provides the foundational wireframe elements using modern Tailwind CSS structure.</span>
+                    </div>
+                    <div class="flex items-start gap-1">
+                        <span>✨</span>
+                        <span><strong>style.css</strong> manages double certificates border themes and keyframe slides animations.</span>
+                    </div>
+                    <div class="flex items-start gap-1">
+                        <span>⚙️</span>
+                        <span><strong>script.js</strong> executes local state, form lookup verifications, and dynamically renders metrics.</span>
+                    </div>
+                    <div class="flex items-start gap-1">
+                        <span>📜</span>
+                        <span>Click <strong>📜 Report Card</strong> to automatically generate a printable certificate for that student.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- ==============================================
+         OVERLAY POPUP MODAL: PRINT-FORMAT CERTIFICATE REPORT CARD
+         ============================================== -->
+    <div id="reportCardModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full overflow-hidden relative border border-slate-100/50 zoom-in animate-duration-300">
+            
+            <!-- Standard close button top corner -->
+            <button id="closeModalBtn" class="no-print absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-mono-val font-bold text-2xl cursor-pointer w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center transition-all z-10" title="Close sheet">&times;</button>
+            
+            <!-- --- CERTIFICATE SHELL BORDER --- -->
+            <div class="p-6">
+                <div class="certificate-border">
+                    <div class="certificate-inner p-6 text-center space-y-4">
+                        
+                        <!-- Header Varsity Crest logo graphics -->
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="text-4xl filter drop-shadow">🎓</span>
+                            <h3 class="text-lg font-bold uppercase tracking-widest text-slate-800 mt-2">VARSITY SPORTS UNION</h3>
+                            <p class="text-[10px] font-bold text-amber-600 uppercase tracking-widest leading-none">Official Athletic Performance Assessment</p>
+                        </div>
+
+                        <div class="border-t border-b border-dashed border-slate-200 py-3 my-4">
+                            <p class="text-xs italic text-slate-400">This certifies that undergraduate candidate</p>
+                            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight my-1" id="rcName">Student Name</h2>
+                            <p class="text-xs text-slate-500 font-semibold font-mono-val">ID: <span id="rcId">STU-XYZ</span> &bull; <span id="rcClass">Class Grade</span></p>
+                        </div>
+
+                        <!-- Core score stats dynamic widgets -->
+                        <div>
+                            <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Has completed athletic assessment evaluations for</p>
+                            <h4 class="text-lg font-extrabold text-indigo-900 mt-1" id="rcSport">Basketball</h4>
+                        </div>
+
+                        <!-- Highlights Grade box layouts -->
+                        <div class="flex items-center justify-center gap-6 py-2">
+                            <div class="bg-slate-50/80 border border-slate-100 p-3 px-5 rounded-xl text-center">
+                                <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider leading-none">Test Score</p>
+                                <p class="text-xl font-extrabold text-slate-900 font-mono-val mt-1" id="rcScore">0%</p>
+                            </div>
+                            <div class="bg-slate-50/80 border border-slate-100 p-3 px-6 rounded-xl text-center">
+                                <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider leading-none">Final Grade</p>
+                                <p class="text-2xl font-extrabold text-amber-600 font-mono-val mt-0.5" id="rcGrade">A</p>
+                            </div>
+                        </div>
+
+                        <!-- Verdict alert badge -->
+                        <div class="flex items-center justify-center mt-2">
+                            <span id="rcResult" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200">PASS</span>
+                        </div>
+
+                        <!-- Custom dynamic trainer advice statement content text -->
+                        <div class="p-3.5 bg-slate-50 rounded-xl max-w-md mx-auto">
+                            <p class="text-[11px] font-semibold text-slate-600 italic leading-relaxed" id="rcCoachStatement">
+                                Coach Comment: Excellent team efforts and outstanding technical display during evaluations session labs.
+                            </p>
+                        </div>
+
+                        <!-- Date stamp and seal section -->
+                        <div class="grid grid-cols-2 gap-6 pt-4 border-t border-dashed border-slate-200">
+                            <div class="text-left">
+                                <p class="text-[9px] uppercase font-bold text-slate-400">Attestation Date</p>
+                                <p class="text-[11px] font-bold text-slate-800" id="rcDateStamp">June 13, 2026</p>
+                            </div>
+                            <div class="text-right flex flex-col items-end">
+                                <p class="text-[9px] uppercase font-bold text-slate-400">Head of Athletics</p>
+                                <div class="w-16 h-4 border-b border-slate-300 italic text-[11px] font-mono-val text-slate-500 mt-0.5 select-none font-bold text-center">G. Coach</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal control panel section (no-print) -->
+            <div class="bg-slate-50 p-4 border-t border-slate-100 flex items-center justify-end gap-3 no-print">
+                <button onclick="hideReportCardModal()" class="px-4 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-all cursor-pointer">
+                    Close Preview
+                </button>
+                <button onclick="window.print()" class="px-5 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+                    🖨️ Print Certificate
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==============================================
+         GLOBAL TOAST NOTIFICATIONS ALERTS CONTAINER 
+         ============================================== -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 max-w-sm w-full space-y-3 no-print">
+        <!-- Injected dynamically via script.js toast method callbacks -->
+    </div>
+
+    <!-- Anchor JavaScript core modules linking -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>

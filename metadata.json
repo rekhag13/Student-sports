@@ -1,0 +1,6 @@
+{
+  "name": "Student Sports Management System",
+  "description": "A beginner-friendly single-page dashboard to register students, perform complete CRUD operations, and generate sport-themed report cards with localStorage persistence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
